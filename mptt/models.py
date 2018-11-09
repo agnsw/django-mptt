@@ -240,6 +240,9 @@ class MPTTModel(models.Model):
         """
         Returns the number of descendants this model instance has.
         """
+        if self._mpttfield('right') is None:
+            # node not saved yet
+            return 0
         return (self._mpttfield('right') -
                 self._mpttfield('left') - 1) / 2
 
